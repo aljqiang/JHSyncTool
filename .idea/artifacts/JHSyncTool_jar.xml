@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="JHSyncTool:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/JHSyncTool</output-path>
+    <root id="archive" name="JHSyncTool.jar">
+      <element id="module-output" name="JHSyncTool" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-logging-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/commons-net-3.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/edtFTPj-1.5.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/web/WEB-INF/lib/log4j-1.2.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/IDEA/workspace/config/Tomcat5/common/lib/jsp-api.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="D:/IDEA/workspace/config/Tomcat5/common/lib/servlet-api.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
