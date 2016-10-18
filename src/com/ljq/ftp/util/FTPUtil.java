@@ -22,11 +22,11 @@ public class FTPUtil {
 
 
     /**
-     * »ñÈ¡FTPClient¶ÔÏó
-     * @param ftpHost FTPÖ÷»ú·şÎñÆ÷
-     * @param ftpPassword FTP µÇÂ¼ÃÜÂë
-     * @param ftpUserName FTPµÇÂ¼ÓÃ»§Ãû
-     * @param ftpPort FTP¶Ë¿Ú Ä¬ÈÏÎª21
+     * è·å–FTPClientå¯¹è±¡
+     * @param ftpHost FTPä¸»æœºæœåŠ¡å™¨
+     * @param ftpPassword FTP ç™»å½•å¯†ç 
+     * @param ftpUserName FTPç™»å½•ç”¨æˆ·å
+     * @param ftpPort FTPç«¯å£ é»˜è®¤ä¸º21
      * @return
      */
     public static FTPClient getFTPClient(String ftpHost, String ftpPassword,
@@ -34,20 +34,20 @@ public class FTPUtil {
         FTPClient ftpClient = null;
         try {
             ftpClient = new FTPClient();
-            ftpClient.connect(ftpHost, ftpPort);// Á¬½ÓFTP·şÎñÆ÷
-            ftpClient.login(ftpUserName, ftpPassword);// µÇÂ½FTP·şÎñÆ÷
+            ftpClient.connect(ftpHost, ftpPort);// è¿æ¥FTPæœåŠ¡å™¨
+            ftpClient.login(ftpUserName, ftpPassword);// ç™»é™†FTPæœåŠ¡å™¨
             if (!FTPReply.isPositiveCompletion(ftpClient.getReplyCode())) {
-                logger.info("Î´Á¬½Óµ½FTP£¬ÓÃ»§Ãû»òÃÜÂë´íÎó¡£");
+                logger.info("æœªè¿æ¥åˆ°FTPï¼Œç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ã€‚");
                 ftpClient.disconnect();
             } else {
-                logger.info("FTPÁ¬½Ó³É¹¦¡£");
+                logger.info("FTPè¿æ¥æˆåŠŸã€‚");
             }
         } catch (SocketException e) {
             e.printStackTrace();
-            logger.info("FTPµÄIPµØÖ·¿ÉÄÜ´íÎó£¬ÇëÕıÈ·ÅäÖÃ¡£");
+            logger.info("FTPçš„IPåœ°å€å¯èƒ½é”™è¯¯ï¼Œè¯·æ­£ç¡®é…ç½®ã€‚");
         } catch (IOException e) {
             e.printStackTrace();
-            logger.info("FTPµÄ¶Ë¿Ú´íÎó,ÇëÕıÈ·ÅäÖÃ¡£");
+            logger.info("FTPçš„ç«¯å£é”™è¯¯,è¯·æ­£ç¡®é…ç½®ã€‚");
         }
         return ftpClient;
     }

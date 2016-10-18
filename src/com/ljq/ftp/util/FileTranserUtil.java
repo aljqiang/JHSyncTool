@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Â¼ÒôÍ¬²½¹¤¾ß(Í¨¹ıÎÄ¼ş´«Êä·½Ê½Í¬²½Â¼ÒôÎÄ¼şµ½±¾µØ·şÎñÆ÷)
+ * å½•éŸ³åŒæ­¥å·¥å…·(é€šè¿‡æ–‡ä»¶ä¼ è¾“æ–¹å¼åŒæ­¥å½•éŸ³æ–‡ä»¶åˆ°æœ¬åœ°æœåŠ¡å™¨)
  * User: Larry Lai
  * Date: 2016-08-26
  * Time: 15:51
@@ -15,19 +15,19 @@ import java.util.*;
 public class FileTranserUtil {
 
     /**
-     * Ô¶¶ËÂ¼ÒôÎÄ¼şÂ·¾¶
+     * è¿œç«¯å½•éŸ³æ–‡ä»¶è·¯å¾„
      */
     private static StringBuffer remotePath;
     /**
-     * ±¾µØ´æ´¢Â·¾¶
+     * æœ¬åœ°å­˜å‚¨è·¯å¾„
      */
     private static StringBuffer localPath;
     /**
-     * µ÷¶ÈÆ÷
+     * è°ƒåº¦å™¨
      */
     static Timer timer;
     /**
-     * Í¬²½Ê±¼ä£¨¼ä¸ô£©£¬µ¥Î»£ºÃë
+     * åŒæ­¥æ—¶é—´ï¼ˆé—´éš”ï¼‰ï¼Œå•ä½ï¼šç§’
      */
     private static int syncTime;
 
@@ -46,7 +46,7 @@ public class FileTranserUtil {
     }
 
     /**
-     * ÎÄ¼ş¸´ÖÆ
+     * æ–‡ä»¶å¤åˆ¶
      *
      * @param src
      * @param dist
@@ -75,7 +75,7 @@ public class FileTranserUtil {
     }
 
     /**
-     * ±éÀúÎÄ¼şÄ¿Â¼
+     * éå†æ–‡ä»¶ç›®å½•
      */
     private static String[] fileReader(String pathInput) {
         File file = new File(pathInput);
@@ -89,7 +89,7 @@ public class FileTranserUtil {
 
             for (int i = 0; i < files.length; i++) {
                 if (files[i].isFile()) {
-//                    log.info("=============================ÎÄ¼şÂ·¾¶£º\n" + files[i].getPath().replace("\\","/"));
+//                    log.info("=============================æ–‡ä»¶è·¯å¾„ï¼š\n" + files[i].getPath().replace("\\","/"));
                     if (k != 0) {
                         filePath += ",";
                     }
@@ -98,7 +98,7 @@ public class FileTranserUtil {
                     k++;
 
                 } else if (files[i].isDirectory()) {
-                    LogUtil.error("ÕÒ²»µ½ÎÄ¼ş.");
+                    LogUtil.error("æ‰¾ä¸åˆ°æ–‡ä»¶.");
                 }
             }
 
@@ -113,18 +113,18 @@ public class FileTranserUtil {
     }
 
     /**
-     * Main·½·¨
+     * Mainæ–¹æ³•
      *
      * @param args
      */
     public static void main(String[] args) {
 
-        // ÉèÖÃÊ±Çø£¬·ÀÖ¹java»ñµÃµÄÊ±Çø¸úÏµÍ³µÄÊ±Çø²»Ò»Ñù
+        // è®¾ç½®æ—¶åŒºï¼Œé˜²æ­¢javaè·å¾—çš„æ—¶åŒºè·Ÿç³»ç»Ÿçš„æ—¶åŒºä¸ä¸€æ ·
         TimeZone tz = TimeZone.getTimeZone("Asia/Shanghai");
         TimeZone.setDefault(tz);
 
         FileTranserUtil.setParameter();
-        LogUtil.info("Â¼ÒôÎÄ¼şÍ¬²½³ÌĞòÆô¶¯...");
+        LogUtil.info("å½•éŸ³æ–‡ä»¶åŒæ­¥ç¨‹åºå¯åŠ¨...");
 
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -133,23 +133,23 @@ public class FileTranserUtil {
 
                 try {
 
-                    LogUtil.info("########################¿ªÊ¼Í¬²½Â¼ÒôÎÄ¼ş########################");
+                    LogUtil.info("########################å¼€å§‹åŒæ­¥å½•éŸ³æ–‡ä»¶########################");
 
-                    // ÈÕÆÚ¸ñÊ½»¯
+                    // æ—¥æœŸæ ¼å¼åŒ–
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
                     String date = dateFormat.format(new Date());
 
-                    // Æ´½ÓÎÄ¼şÂ·¾¶
+                    // æ‹¼æ¥æ–‡ä»¶è·¯å¾„
                     remotePath.append(date);
                     localPath.append(date);
 
-                    // ±¾µØ´æ´¢Â·¾¶²»´æÔÚÔò´´½¨
+                    // æœ¬åœ°å­˜å‚¨è·¯å¾„ä¸å­˜åœ¨åˆ™åˆ›å»º
                     File fileLocal = new File(localPath.toString());
                     if (!fileLocal.exists()) {
                         fileLocal.mkdir();
                     }
 
-                    // °Ñ±¾µØÒÑÓĞÂ¼ÒôÎÄ¼ş·Åµ½Êı×éÀï£¬ÅĞ¶ÏÂ¼ÒôÎÄ¼şÊÇ·ñÒÑ´æÔÚ
+                    // æŠŠæœ¬åœ°å·²æœ‰å½•éŸ³æ–‡ä»¶æ”¾åˆ°æ•°ç»„é‡Œï¼Œåˆ¤æ–­å½•éŸ³æ–‡ä»¶æ˜¯å¦å·²å­˜åœ¨
                     File[] files = fileLocal.listFiles();
                     List<String> filesCheckArray = new ArrayList<String>();
 
@@ -164,34 +164,34 @@ public class FileTranserUtil {
                     String[] remotePathFileNames = remotePathFile.list();
 
                     boolean flag = false;
-                    // ÔöÁ¿µÄ·½Ê½Í¬²½Â¼ÒôÎÄ¼ş
-                    for (int i = 0; i < remotePathFileNames.length; i++) {
+                    // å¢é‡çš„æ–¹å¼åŒæ­¥å½•éŸ³æ–‡ä»¶
+                    for (int i = 0; remotePathFileNames !=null && i < remotePathFileNames.length; i++) {
                         String fileName = remotePathFileNames[i];
 
                         if (!filesCheckArray.contains(fileName + ".wav")) {
                             flag = true;
 
-                            LogUtil.info(" ¿ªÊ¼½«Â¼ÒôÎÄ¼ş:[" + fileName + ".wav" + "]Í¬²½µ½±¾µØÎÄ¼şÄ¿Â¼[" + localPath.toString() + "]");
+                            LogUtil.info(" å¼€å§‹å°†å½•éŸ³æ–‡ä»¶:[" + fileName + ".wav" + "]åŒæ­¥åˆ°æœ¬åœ°æ–‡ä»¶ç›®å½•[" + localPath.toString() + "]");
 
-                            // ¸´ÖÆÒÆ¶¯ÎÄ¼şµ½·¢ËÍÄ¿Â¼
+                            // å¤åˆ¶ç§»åŠ¨æ–‡ä»¶åˆ°å‘é€ç›®å½•
                             File dataFile = new File(remotePath.toString() + "\\" + fileName);
                             File destFile = new File(localPath.toString() + "\\" + fileName + ".wav");
 
-//                            LogUtil.info("¿ªÊ¼½«Â¼ÒôÎÄ¼ş:[" + dataFile.getAbsolutePath() + "]Í¬²½µ½±¾µØÎÄ¼şÄ¿Â¼[" + destFile.getAbsolutePath() + "]");
+//                            LogUtil.info("å¼€å§‹å°†å½•éŸ³æ–‡ä»¶:[" + dataFile.getAbsolutePath() + "]åŒæ­¥åˆ°æœ¬åœ°æ–‡ä»¶ç›®å½•[" + destFile.getAbsolutePath() + "]");
 
-                            // Ç¨ÒÆÎÄ¼ş
+                            // è¿ç§»æ–‡ä»¶
                             boolean result = FileTranserUtil.copy(dataFile, destFile);
                         }
                     }
 
                     if (!flag) {
-                        LogUtil.info("Ã»ÓĞĞÂµÄÂ¼ÒôÎÄ¼ş¿ÉÍ¬²½.");
+                        LogUtil.info("æ²¡æœ‰æ–°çš„å½•éŸ³æ–‡ä»¶å¯åŒæ­¥.");
                     }
 
-                    LogUtil.info("########################½áÊøÍ¬²½Â¼ÒôÎÄ¼ş########################");
+                    LogUtil.info("########################ç»“æŸåŒæ­¥å½•éŸ³æ–‡ä»¶########################");
 
                 } catch (Exception e) {
-                    LogUtil.error("Â¼ÒôÎÄ¼şÍ¬²½Òì³££¬´íÎóÎª:" + e);
+                    LogUtil.error("å½•éŸ³æ–‡ä»¶åŒæ­¥å¼‚å¸¸ï¼Œé”™è¯¯ä¸º:" + e);
                 }
 
             }

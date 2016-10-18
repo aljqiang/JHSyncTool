@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * Â¼ÒôÍ¬²½¹¤¾ß(Í¨¹ıFTP·½Ê½Í¬²½Â¼ÒôÎÄ¼şµ½±¾µØ·şÎñÆ÷)
+ * å½•éŸ³åŒæ­¥å·¥å…·(é€šè¿‡FTPæ–¹å¼åŒæ­¥å½•éŸ³æ–‡ä»¶åˆ°æœ¬åœ°æœåŠ¡å™¨)
  * User: Larry Lai
  * Date: 2016-08-24
  * Time: 10:39
@@ -19,7 +19,7 @@ public class FTPCommonUtil_bak20160826 {
 
     private FTPClient ftp = null;
     /**
-     * Ftp·şÎñÆ÷
+     * FtpæœåŠ¡å™¨
      */
     private static String server;
     /**
@@ -28,31 +28,31 @@ public class FTPCommonUtil_bak20160826 {
     private static String ip;
 
     /**
-     * ÓÃ»§Ãû
+     * ç”¨æˆ·å
      */
     private static String uname;
     /**
-     * ÃÜÂë
+     * å¯†ç 
      */
     private static String password;
     /**
-     * Á¬½Ó¶Ë¿Ú£¬Ä¬ÈÏ21
+     * è¿æ¥ç«¯å£ï¼Œé»˜è®¤21
      */
     private static int port = 21;
     /**
-     * Ô¶¶ËÂ¼ÒôÎÄ¼şÂ·¾¶
+     * è¿œç«¯å½•éŸ³æ–‡ä»¶è·¯å¾„
      */
     private static StringBuffer remotePath;
     /**
-     * ±¾µØ´æ´¢Â·¾¶
+     * æœ¬åœ°å­˜å‚¨è·¯å¾„
      */
     private static StringBuffer localPath;
     /**
-     * µ÷¶ÈÆ÷
+     * è°ƒåº¦å™¨
      */
     static Timer timer;
     /**
-     * Í¬²½Ê±¼ä£¨¼ä¸ô£©£¬µ¥Î»£ºÃë
+     * åŒæ­¥æ—¶é—´ï¼ˆé—´éš”ï¼‰ï¼Œå•ä½ï¼šç§’
      */
     private static int syncTime;
 
@@ -64,12 +64,12 @@ public class FTPCommonUtil_bak20160826 {
         }
         this.uname = uname;
         this.password = password;
-        //³õÊ¼»¯
+        //åˆå§‹åŒ–
         ftp = new FTPClient();
     }
 
     /**
-     * Á¬½ÓFTP·şÎñÆ÷
+     * è¿æ¥FTPæœåŠ¡å™¨
      *
      * @return
      * @throws Exception
@@ -85,21 +85,21 @@ public class FTPCommonUtil_bak20160826 {
                 return false;
             }
 
-            // ÎÄ¼şÀàĞÍ,Ä¬ÈÏÊÇASCII
+            // æ–‡ä»¶ç±»å‹,é»˜è®¤æ˜¯ASCII
             // ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
             //ftp.setControlEncoding("GBK");
-            // ÉèÖÃ±»¶¯Ä£Ê½
+            // è®¾ç½®è¢«åŠ¨æ¨¡å¼
             ftp.enterLocalPassiveMode();
             ftp.setConnectTimeout(2000);
             ftp.setBufferSize(1024);
             ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
             // ftp.changeWorkingDirectory(workPath);
-            // ÏìÓ¦ĞÅÏ¢
+            // å“åº”ä¿¡æ¯
             int replyCode = ftp.getReplyCode();
             if ((!FTPReply.isPositiveCompletion(replyCode))) {
-                // ¹Ø±ÕFtpÁ¬½Ó
+                // å…³é—­Ftpè¿æ¥
                 closeFTPClient();
-                // ÊÍ·Å¿Õ¼ä
+                // é‡Šæ”¾ç©ºé—´
                 ftp = null;
                 return false;
             } else {
@@ -113,7 +113,7 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * ÅäÖÃFTPÁ¬½Ó²ÎÊı
+     * é…ç½®FTPè¿æ¥å‚æ•°
      *
      * @return
      * @throws Exception
@@ -128,10 +128,10 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * ÏòFTP¸ùÄ¿Â¼ÉÏ´«ÎÄ¼ş
+     * å‘FTPæ ¹ç›®å½•ä¸Šä¼ æ–‡ä»¶
      *
      * @param localFile
-     * @param newName   ĞÂÎÄ¼şÃû
+     * @param newName   æ–°æ–‡ä»¶å
      * @throws Exception
      */
     public Boolean uploadFile(String localFile, String newName)
@@ -146,7 +146,7 @@ public class FTPCommonUtil_bak20160826 {
             input = new FileInputStream(file);
             success = ftp.storeFile(newName, input);
             if (!success) {
-                throw new Exception("ÎÄ¼şÉÏ´«Ê§°Ü!");
+                throw new Exception("æ–‡ä»¶ä¸Šä¼ å¤±è´¥!");
             }
         } catch (Exception e) {
             throw e;
@@ -159,10 +159,10 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * ÏòFTP¸ùÄ¿Â¼ÉÏ´«ÎÄ¼ş
+     * å‘FTPæ ¹ç›®å½•ä¸Šä¼ æ–‡ä»¶
      *
      * @param input
-     * @param newName ĞÂÎÄ¼şÃû
+     * @param newName æ–°æ–‡ä»¶å
      * @throws Exception
      */
     public Boolean uploadFile(InputStream input, String newName)
@@ -171,7 +171,7 @@ public class FTPCommonUtil_bak20160826 {
         try {
             success = ftp.storeFile(newName, input);
             if (!success) {
-                throw new Exception("ÎÄ¼şÉÏ´«Ê§°Ü!");
+                throw new Exception("æ–‡ä»¶ä¸Šä¼ å¤±è´¥!");
             }
         } catch (Exception e) {
             throw e;
@@ -184,10 +184,10 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * ÏòFTPÖ¸¶¨Â·¾¶ÉÏ´«ÎÄ¼ş
+     * å‘FTPæŒ‡å®šè·¯å¾„ä¸Šä¼ æ–‡ä»¶
      *
      * @param localFile
-     * @param newName        ĞÂÎÄ¼şÃû
+     * @param newName        æ–°æ–‡ä»¶å
      * @param remoteFoldPath
      * @throws Exception
      */
@@ -203,14 +203,14 @@ public class FTPCommonUtil_bak20160826 {
             }
             input = new FileInputStream(file);
 
-            // ¸Ä±äµ±Ç°Â·¾¶µ½Ö¸¶¨Â·¾¶
+            // æ”¹å˜å½“å‰è·¯å¾„åˆ°æŒ‡å®šè·¯å¾„
             if (!this.changeDirectory(remoteFoldPath)) {
-                LogUtil.error("·şÎñÆ÷Â·¾¶²»´æ!");
+                LogUtil.error("æœåŠ¡å™¨è·¯å¾„ä¸å­˜!");
                 return false;
             }
             success = ftp.storeFile(newName, input);
             if (!success) {
-                throw new Exception("ÎÄ¼şÉÏ´«Ê§°Ü!");
+                throw new Exception("æ–‡ä»¶ä¸Šä¼ å¤±è´¥!");
             }
         } catch (Exception e) {
             throw e;
@@ -223,10 +223,10 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * ÏòFTPÖ¸¶¨Â·¾¶ÉÏ´«ÎÄ¼ş
+     * å‘FTPæŒ‡å®šè·¯å¾„ä¸Šä¼ æ–‡ä»¶
      *
      * @param input
-     * @param newName        ĞÂÎÄ¼şÃû
+     * @param newName        æ–°æ–‡ä»¶å
      * @param remoteFoldPath
      * @throws Exception
      */
@@ -234,14 +234,14 @@ public class FTPCommonUtil_bak20160826 {
                               String remoteFoldPath) throws Exception {
         boolean success = false;
         try {
-            // ¸Ä±äµ±Ç°Â·¾¶µ½Ö¸¶¨Â·¾¶
+            // æ”¹å˜å½“å‰è·¯å¾„åˆ°æŒ‡å®šè·¯å¾„
             if (!this.changeDirectory(remoteFoldPath)) {
-                LogUtil.error("·şÎñÆ÷Â·¾¶²»´æ!");
+                LogUtil.error("æœåŠ¡å™¨è·¯å¾„ä¸å­˜!");
                 return false;
             }
             success = ftp.storeFile(newName, input);
             if (!success) {
-                throw new Exception("ÎÄ¼şÉÏ´«Ê§°Ü!");
+                throw new Exception("æ–‡ä»¶ä¸Šä¼ å¤±è´¥!");
             }
         } catch (Exception e) {
             throw e;
@@ -254,11 +254,11 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * ´ÓFTP·şÎñÆ÷ÏÂÔØÎÄ¼ş
+     * ä»FTPæœåŠ¡å™¨ä¸‹è½½æ–‡ä»¶
      *
-     * @param remotePath FTPÂ·¾¶(²»°üº¬ÎÄ¼şÃû)
-     * @param fileName   ÏÂÔØÎÄ¼şÃû
-     * @param localPath  ±¾µØÂ·¾¶
+     * @param remotePath FTPè·¯å¾„(ä¸åŒ…å«æ–‡ä»¶å)
+     * @param fileName   ä¸‹è½½æ–‡ä»¶å
+     * @param localPath  æœ¬åœ°è·¯å¾„
      */
     public Boolean downloadFile(String remotePath, String fileName,
                                 String localPath) throws Exception {
@@ -266,17 +266,17 @@ public class FTPCommonUtil_bak20160826 {
         BufferedOutputStream output = null;
         boolean success = false;
         try {
-            // ¼ì²é±¾µØÂ·¾¶
+            // æ£€æŸ¥æœ¬åœ°è·¯å¾„
             this.checkFileExist(localPath);
-            // ¸Ä±ä¹¤×÷Â·¾¶
+            // æ”¹å˜å·¥ä½œè·¯å¾„
             if (!this.changeDirectory(remotePath)) {
-                LogUtil.error("·şÎñÆ÷Â·¾¶²»´æÔÚ");
+                LogUtil.error("æœåŠ¡å™¨è·¯å¾„ä¸å­˜åœ¨");
                 return false;
             }
-            // ÁĞ³öµ±Ç°¹¤×÷Â·¾¶ÏÂµÄÎÄ¼şÁĞ±í
+            // åˆ—å‡ºå½“å‰å·¥ä½œè·¯å¾„ä¸‹çš„æ–‡ä»¶åˆ—è¡¨
             List<FTPFile> fileList = this.getFileList();
             if (fileList == null || fileList.size() == 0) {
-                LogUtil.error("·şÎñÆ÷µ±Ç°Â·¾¶ÏÂ²»´æÔÚÎÄ¼ş£¡");
+                LogUtil.error("æœåŠ¡å™¨å½“å‰è·¯å¾„ä¸‹ä¸å­˜åœ¨æ–‡ä»¶ï¼");
                 return success;
             }
             for (FTPFile ftpfile : fileList) {
@@ -289,7 +289,7 @@ public class FTPCommonUtil_bak20160826 {
                 }
             }
             if (!success) {
-                throw new Exception("ÎÄ¼şÏÂÔØÊ§°Ü!");
+                throw new Exception("æ–‡ä»¶ä¸‹è½½å¤±è´¥!");
             }
         } catch (Exception e) {
             throw e;
@@ -302,7 +302,7 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * ´ÓFTP·şÎñÆ÷»ñÈ¡ÎÄ¼şÁ÷
+     * ä»FTPæœåŠ¡å™¨è·å–æ–‡ä»¶æµ
      *
      * @param remoteFilePath
      * @return
@@ -314,7 +314,7 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * »ñÈ¡FTP·şÎñÆ÷ÉÏÖ¸¶¨Â·¾¶ÏÂµÄÎÄ¼şÁĞ±í
+     * è·å–FTPæœåŠ¡å™¨ä¸ŠæŒ‡å®šè·¯å¾„ä¸‹çš„æ–‡ä»¶åˆ—è¡¨
      *
      * @param remotePath
      * @return
@@ -329,7 +329,7 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * »ñÈ¡FTP·şÎñÆ÷ÉÏ[Ö¸¶¨Â·¾¶]ÏÂµÄÎÄ¼şÁĞ±í
+     * è·å–FTPæœåŠ¡å™¨ä¸Š[æŒ‡å®šè·¯å¾„]ä¸‹çš„æ–‡ä»¶åˆ—è¡¨
      *
      * @param remotePath
      * @return
@@ -343,7 +343,7 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * »ñÈ¡FTP·şÎñÆ÷[µ±Ç°¹¤×÷Â·¾¶]ÏÂµÄÎÄ¼şÁĞ±í
+     * è·å–FTPæœåŠ¡å™¨[å½“å‰å·¥ä½œè·¯å¾„]ä¸‹çš„æ–‡ä»¶åˆ—è¡¨
      *
      * @return
      * @throws Exception
@@ -356,7 +356,7 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * ¸Ä±äFTP·şÎñÆ÷¹¤×÷Â·¾¶
+     * æ”¹å˜FTPæœåŠ¡å™¨å·¥ä½œè·¯å¾„
      *
      * @param remoteFoldPath
      */
@@ -366,7 +366,7 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * É¾³ıÎÄ¼ş
+     * åˆ é™¤æ–‡ä»¶
      *
      * @param remoteFilePath
      * @return
@@ -378,7 +378,7 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * ´´½¨Ä¿Â¼
+     * åˆ›å»ºç›®å½•
      *
      * @param remoteFoldPath
      * @return
@@ -387,13 +387,13 @@ public class FTPCommonUtil_bak20160826 {
 
         boolean flag = ftp.makeDirectory(remoteFoldPath);
         if (!flag) {
-            throw new Exception("´´½¨Ä¿Â¼Ê§°Ü");
+            throw new Exception("åˆ›å»ºç›®å½•å¤±è´¥");
         }
         return false;
     }
 
     /**
-     * É¾³ıÄ¿Â¼
+     * åˆ é™¤ç›®å½•
      *
      * @param remoteFoldPath
      * @return
@@ -405,7 +405,7 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * É¾³ıÄ¿Â¼ÒÔ¼°ÎÄ¼ş
+     * åˆ é™¤ç›®å½•ä»¥åŠæ–‡ä»¶
      *
      * @param remoteFoldPath
      * @return
@@ -438,7 +438,7 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * ¼ì²é±¾µØÂ·¾¶ÊÇ·ñ´æÔÚ
+     * æ£€æŸ¥æœ¬åœ°è·¯å¾„æ˜¯å¦å­˜åœ¨
      *
      * @param filePath
      * @return
@@ -449,7 +449,7 @@ public class FTPCommonUtil_bak20160826 {
         File file = new File(filePath);
         if (!file.exists()) {
             file.mkdir();
-//            throw new Exception("±¾µØÂ·¾¶²»´æÔÚ,Çë¼ì²é!");
+//            throw new Exception("æœ¬åœ°è·¯å¾„ä¸å­˜åœ¨,è¯·æ£€æŸ¥!");
         } else {
             flag = true;
         }
@@ -458,7 +458,7 @@ public class FTPCommonUtil_bak20160826 {
 
 
     /**
-     * ¹Ø±ÕFTPÁ¬½Ó
+     * å…³é—­FTPè¿æ¥
      *
      * @param ftp
      * @throws Exception
@@ -470,18 +470,18 @@ public class FTPCommonUtil_bak20160826 {
                 ftp.logout();
             ftp.disconnect();
         } catch (Exception e) {
-            throw new Exception("¹Ø±ÕFTP·şÎñ³ö´í!");
+            throw new Exception("å…³é—­FTPæœåŠ¡å‡ºé”™!");
         }
     }
 
     /**
-     * ¹Ø±ÕFTPÁ¬½Ó
+     * å…³é—­FTPè¿æ¥
      *
      * @throws Exception
      */
     public void closeFTPClient() throws Exception {
 
-        LogUtil.info("¹Ø±ÕFTPÁ¬½Ó.");
+        LogUtil.info("å…³é—­FTPè¿æ¥.");
         this.closeFTPClient(this.ftp);
     }
 
@@ -536,7 +536,7 @@ public class FTPCommonUtil_bak20160826 {
         this.ftp.cwd(dir);
         InputStream inputStream = this.ftp.retrieveFileStream(filename);
         if (inputStream == null) {
-            throw new IOException("Ã»ÓĞ·¢ÏÖÎÄ¼ş");
+            throw new IOException("æ²¡æœ‰å‘ç°æ–‡ä»¶");
         }
         byte[] buffer = new byte[1024 * 1024];
         int byteread = 0;
@@ -568,18 +568,18 @@ public class FTPCommonUtil_bak20160826 {
     }
 
     /**
-     * Main·½·¨
+     * Mainæ–¹æ³•
      *
      * @param args
      */
     public static void main(String[] args) {
 
-        // ÉèÖÃÊ±Çø£¬·ÀÖ¹java»ñµÃµÄÊ±Çø¸úÏµÍ³µÄÊ±Çø²»Ò»Ñù
+        // è®¾ç½®æ—¶åŒºï¼Œé˜²æ­¢javaè·å¾—çš„æ—¶åŒºè·Ÿç³»ç»Ÿçš„æ—¶åŒºä¸ä¸€æ ·
         TimeZone tz = TimeZone.getTimeZone("Asia/Shanghai");
         TimeZone.setDefault(tz);
 
         FTPCommonUtil_bak20160826.setParameter();
-        LogUtil.info("Â¼ÒôÎÄ¼şÍ¬²½³ÌĞòÆô¶¯...");
+        LogUtil.info("å½•éŸ³æ–‡ä»¶åŒæ­¥ç¨‹åºå¯åŠ¨...");
 
         timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -588,37 +588,37 @@ public class FTPCommonUtil_bak20160826 {
 
                 try {
 
-                    LogUtil.info("########################¿ªÊ¼Í¬²½Â¼ÒôÎÄ¼ş########################");
+                    LogUtil.info("########################å¼€å§‹åŒæ­¥å½•éŸ³æ–‡ä»¶########################");
 
-                    // ÈÕÆÚ¸ñÊ½»¯
+                    // æ—¥æœŸæ ¼å¼åŒ–
                     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
                     String date = dateFormat.format(new Date());
 
-                    // Æ´½ÓÎÄ¼şÂ·¾¶
+                    // æ‹¼æ¥æ–‡ä»¶è·¯å¾„
                     remotePath.append(date);
                     localPath.append(date);
 
-                    // »ñÈ¡FTPÁ¬½Ó
+                    // è·å–FTPè¿æ¥
                     FTPCommonUtil_bak20160826 fu = new FTPCommonUtil_bak20160826(ip, Integer.valueOf(port), uname, password);
                     boolean check=fu.connectFTPServer();
 
                     if(check){
-                        LogUtil.info("¿ªÆôFTPÁ¬½Ó.");
+                        LogUtil.info("å¼€å¯FTPè¿æ¥.");
                     }else {
-                        throw new Exception("¿ªÆôFTPÁ¬½ÓÊ§°Ü.");
+                        throw new Exception("å¼€å¯FTPè¿æ¥å¤±è´¥.");
                     }
 
                     FTPClient ftpClient = fu.getFtp();
                     ftpClient.cwd(remotePath.toString());
                     String[] fileFtp = ftpClient.listNames();
 
-                    // ±¾µØ´æ´¢Â·¾¶²»´æÔÚÔò´´½¨
+                    // æœ¬åœ°å­˜å‚¨è·¯å¾„ä¸å­˜åœ¨åˆ™åˆ›å»º
                     File fileLocal = new File(localPath.toString());
                     if (!fileLocal.exists()) {
                         fileLocal.mkdir();
                     }
 
-                    // °Ñ±¾µØÒÑÓĞÂ¼ÒôÎÄ¼ş·Åµ½Êı×éÀï£¬ÅĞ¶ÏÂ¼ÒôÎÄ¼şÊÇ·ñÒÑ´æÔÚ
+                    // æŠŠæœ¬åœ°å·²æœ‰å½•éŸ³æ–‡ä»¶æ”¾åˆ°æ•°ç»„é‡Œï¼Œåˆ¤æ–­å½•éŸ³æ–‡ä»¶æ˜¯å¦å·²å­˜åœ¨
                     File[] files = fileLocal.listFiles();
                     List<String> filesCheckArray = new ArrayList<String>();
 
@@ -630,27 +630,27 @@ public class FTPCommonUtil_bak20160826 {
 
 
                     boolean flag=false;
-                    // ÔöÁ¿µÄ·½Ê½Í¬²½Â¼ÒôÎÄ¼ş
+                    // å¢é‡çš„æ–¹å¼åŒæ­¥å½•éŸ³æ–‡ä»¶
                     for (int i = 0; i < fileFtp.length; i++) {
                         String fileName = fileFtp[i];
 
                         if (!filesCheckArray.contains(fileName+ ".wav")) {
                             flag=true;
 
-                            LogUtil.info(" ¿ªÊ¼½«Â¼ÒôÎÄ¼ş:[" + fileName + ".wav" + "]Í¬²½µ½±¾µØÎÄ¼şÄ¿Â¼[" + localPath.toString() + "]");
+                            LogUtil.info(" å¼€å§‹å°†å½•éŸ³æ–‡ä»¶:[" + fileName + ".wav" + "]åŒæ­¥åˆ°æœ¬åœ°æ–‡ä»¶ç›®å½•[" + localPath.toString() + "]");
                             fu.downloadFile(remotePath.toString(), fileName, localPath.toString());
                         }
                     }
 
                     if(!flag){
-                        LogUtil.info("Ã»ÓĞĞÂµÄÂ¼ÒôÎÄ¼ş¿ÉÍ¬²½.");
+                        LogUtil.info("æ²¡æœ‰æ–°çš„å½•éŸ³æ–‡ä»¶å¯åŒæ­¥.");
                     }
 
-                    LogUtil.info("########################½áÊøÍ¬²½Â¼ÒôÎÄ¼ş########################");
+                    LogUtil.info("########################ç»“æŸåŒæ­¥å½•éŸ³æ–‡ä»¶########################");
                     fu.closeFTPClient();
 
                 } catch (Exception e) {
-                    LogUtil.error("Â¼ÒôÎÄ¼şÍ¬²½Òì³££¬´íÎóÎª:" + e);
+                    LogUtil.error("å½•éŸ³æ–‡ä»¶åŒæ­¥å¼‚å¸¸ï¼Œé”™è¯¯ä¸º:" + e);
                 }
 
             }
