@@ -175,6 +175,9 @@ public class FileTranserUtil {
 
                             // 复制移动文件到发送目录
                             File dataFile = new File(remotePath.toString() + "\\" + fileName);
+
+//                            File destFile = new File(localPath.toString() + "\\" + fileName + ".wav");
+                            // 解决追加文件后缀.wav文件大小变小的问题
                             File destFile = new File(localPath.toString() , fileName + ".wav");
 
 //                            LogUtil.info("开始将录音文件:[" + dataFile.getAbsolutePath() + "]同步到本地文件目录[" + destFile.getAbsolutePath() + "]");
