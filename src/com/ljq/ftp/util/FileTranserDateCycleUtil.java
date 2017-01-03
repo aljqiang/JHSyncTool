@@ -123,21 +123,21 @@ public class FileTranserDateCycleUtil {
         TimeZone tz = TimeZone.getTimeZone("Asia/Shanghai");
         TimeZone.setDefault(tz);
 
-        FileTranserUtil.setParameter();
+        FileTranserDateCycleUtil.setParameter();
         LogUtil.info("录音文件同步程序启动...");
 
         try {
 
             LogUtil.info("########################开始同步录音文件########################");
 
-            Date startDate = new SimpleDateFormat("yyyyMMdd").parse("20160801");  // 定义起始日期
-            Date endDate = new SimpleDateFormat("yyyyMMdd").parse("20161103");  // 定义结束日期
+            Date startDate = new SimpleDateFormat("yyyyMMdd").parse("20170101");  // 定义起始日期
+            Date endDate = new SimpleDateFormat("yyyyMMdd").parse("20170104");  // 定义结束日期
 
             Calendar calendar = Calendar.getInstance();  // 定义日期实例
             calendar.setTime(startDate);  // 设置日期起始时间
             while (calendar.getTime().before(endDate)) {  // 判断是否到结束日期
 
-                FileTranserUtil.setParameter();
+                FileTranserDateCycleUtil.setParameter();
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
                 String date = sdf.format(calendar.getTime());
@@ -188,7 +188,7 @@ public class FileTranserDateCycleUtil {
 //                            LogUtil.info("开始将录音文件:[" + dataFile.getAbsolutePath() + "]同步到本地文件目录[" + destFile.getAbsolutePath() + "]");
 
                         // 迁移文件
-                        boolean result = FileTranserUtil.copy(dataFile, destFile);
+                        boolean result = FileTranserDateCycleUtil.copy(dataFile, destFile);
                     }
                 }
 
