@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
- * ÎÄ¼ş±¸·İ³ÌĞò
+ * æ–‡ä»¶å¤‡ä»½ç¨‹åº
  * User: Larry Lai
  * Date: 2016-06-20
  * Time: 16:04
@@ -31,11 +31,11 @@ public class CopyDir {
     public void listFileInDir(File file) {
 
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai")); // ÉèÖÃÊ±Çø
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai")); // è®¾ç½®æ—¶åŒº
 
         File[] files = file.listFiles();
 
-        // ´¦Àí¶à¸öÆÁ±ÎµÄÎÄ¼ş¼Ğ
+        // å¤„ç†å¤šä¸ªå±è”½çš„æ–‡ä»¶å¤¹
         String[] shieldFileArry=shieldFile.split(",");
 
         boolean flag;
@@ -60,7 +60,7 @@ public class CopyDir {
                     tempFile.mkdirs();
                     listFileInDir(f);
                 } else {
-//                    System.out.println("Ô´ÎÄ¼ş:" + f.getAbsolutePath());
+//                    System.out.println("æºæ–‡ä»¶:" + f.getAbsolutePath());
 
                     int endindex = tempto.lastIndexOf("\\");
 
@@ -70,9 +70,9 @@ public class CopyDir {
 
                     tempFile.mkdirs();
 
-//                    System.out.println("Ä¿±êÎÄ¼ş:" + tempto);
+//                    System.out.println("ç›®æ ‡æ–‡ä»¶:" + tempto);
 
-                    System.out.println(format.format(new Date())+" ¿ªÊ¼½«Ô´ÎÄ¼ş:[" + f.getAbsolutePath() + "]×ªÒÆµ½Ä¿Â¼ÎÄ¼ş[" + tempto + "]");
+                    System.out.println(format.format(new Date())+" å¼€å§‹å°†æºæ–‡ä»¶:[" + f.getAbsolutePath() + "]è½¬ç§»åˆ°ç›®å½•æ–‡ä»¶[" + tempto + "]");
 
                     copy(tempfrom, tempto);
                 }
@@ -121,7 +121,7 @@ public class CopyDir {
     }
 
     /**
-     * Ôö¼Ó»ò¼õÉÙÌìÊı
+     * å¢åŠ æˆ–å‡å°‘å¤©æ•°
      * @param date
      * @param num
      * @return
@@ -134,7 +134,7 @@ public class CopyDir {
     }
 
     /**
-     * ¼ì²éÊı×éÊÇ·ñ°üº¬ÔªËØ(Ê¹ÓÃList)
+     * æ£€æŸ¥æ•°ç»„æ˜¯å¦åŒ…å«å…ƒç´ (ä½¿ç”¨List)
      * @param arr
      * @param targetValue
      * @return
@@ -146,8 +146,8 @@ public class CopyDir {
     public static void init(){
         CopyDir.setParameter();
         System.out.println(CopyDir.originalPath + " " + CopyDir.newPath + " " + CopyDir.shieldFile);
-        System.out.println("########################¿ªÊ¼±¸·İ########################");
-        System.out.println("Ô´ÎÄ¼şÄ¿Â¼£º"+ CopyDir.originalPath + "\n" + "Ä¿±êÎÄ¼şÄ¿Â¼£º" + CopyDir.newPath + "\n" + "ºöÂÔÎÄ¼şÄ¿Â¼£º" + CopyDir.shieldFile);
+        System.out.println("########################å¼€å§‹å¤‡ä»½########################");
+        System.out.println("æºæ–‡ä»¶ç›®å½•ï¼š"+ CopyDir.originalPath + "\n" + "ç›®æ ‡æ–‡ä»¶ç›®å½•ï¼š" + CopyDir.newPath + "\n" + "å¿½ç•¥æ–‡ä»¶ç›®å½•ï¼š" + CopyDir.shieldFile);
         File fromfile = new File(CopyDir.originalPath);
         File tofile = new File(CopyDir.newPath);
         CopyDir copy = new CopyDir();
@@ -157,27 +157,27 @@ public class CopyDir {
 
         copy.listFileInDir(fromfile);
 
-        System.out.println("########################±¸·İ½áÊø########################");
+        System.out.println("########################å¤‡ä»½ç»“æŸ########################");
     }
 
     public static void main(String[] args) {
-        System.out.println("³ÌĞò³õÊ¼»¯...");
+        System.out.println("ç¨‹åºåˆå§‹åŒ–...");
         setParameter();
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai")); // ÉèÖÃÊ±Çø
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(runningTime));  // Áè³¿1µã
+        calendar.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai")); // è®¾ç½®æ—¶åŒº
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(runningTime));  // å‡Œæ™¨1ç‚¹
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
-        Date date=calendar.getTime();  // µÚÒ»´ÎÖ´ĞĞ¶¨Ê±ÈÎÎñµÄÊ±¼ä
-        // Èç¹ûµÚÒ»´ÎÖ´ĞĞ¶¨Ê±ÈÎÎñµÄÊ±¼ä Ğ¡ÓÚµ±Ç°µÄÊ±¼ä
-        // ´ËÊ±ÒªÔÚ µÚÒ»´ÎÖ´ĞĞ¶¨Ê±ÈÎÎñµÄÊ±¼ä¼ÓÒ»Ìì£¬ÒÔ±ã´ËÈÎÎñÔÚÏÂ¸öÊ±¼äµãÖ´ĞĞ¡£Èç¹û²»¼ÓÒ»Ìì£¬ÈÎÎñ»áÁ¢¼´Ö´ĞĞ¡£
+        Date date=calendar.getTime();  // ç¬¬ä¸€æ¬¡æ‰§è¡Œå®šæ—¶ä»»åŠ¡çš„æ—¶é—´
+        // å¦‚æœç¬¬ä¸€æ¬¡æ‰§è¡Œå®šæ—¶ä»»åŠ¡çš„æ—¶é—´ å°äºå½“å‰çš„æ—¶é—´
+        // æ­¤æ—¶è¦åœ¨ ç¬¬ä¸€æ¬¡æ‰§è¡Œå®šæ—¶ä»»åŠ¡çš„æ—¶é—´åŠ ä¸€å¤©ï¼Œä»¥ä¾¿æ­¤ä»»åŠ¡åœ¨ä¸‹ä¸ªæ—¶é—´ç‚¹æ‰§è¡Œã€‚å¦‚æœä¸åŠ ä¸€å¤©ï¼Œä»»åŠ¡ä¼šç«‹å³æ‰§è¡Œã€‚
         if (date.before(new Date())) {
             date = CopyDir.addDay(date, 1);
         }
 //        Timer timer = new Timer();
 //        Task task = new Task();
-//        //°²ÅÅÖ¸¶¨µÄÈÎÎñÔÚÖ¸¶¨µÄÊ±¼ä¿ªÊ¼½øĞĞÖØ¸´µÄ¹Ì¶¨ÑÓ³ÙÖ´ĞĞ¡£
+//        //å®‰æ’æŒ‡å®šçš„ä»»åŠ¡åœ¨æŒ‡å®šçš„æ—¶é—´å¼€å§‹è¿›è¡Œé‡å¤çš„å›ºå®šå»¶è¿Ÿæ‰§è¡Œã€‚
 //        timer.schedule(task,date,PERIOD_DAY);
 
         timer = new Timer();
@@ -185,8 +185,8 @@ public class CopyDir {
             public void run() {
                 CopyDir.setParameter();
                 System.out.println(CopyDir.originalPath + " " + CopyDir.newPath + " " + CopyDir.shieldFile);
-                System.out.println("########################¿ªÊ¼±¸·İ########################");
-                System.out.println("Ô´ÎÄ¼şÄ¿Â¼£º"+ CopyDir.originalPath + "\n" + "Ä¿±êÎÄ¼şÄ¿Â¼£º" + CopyDir.newPath + "\n" + "ºöÂÔÎÄ¼şÄ¿Â¼£º" + CopyDir.shieldFile);
+                System.out.println("########################å¼€å§‹å¤‡ä»½########################");
+                System.out.println("æºæ–‡ä»¶ç›®å½•ï¼š"+ CopyDir.originalPath + "\n" + "ç›®æ ‡æ–‡ä»¶ç›®å½•ï¼š" + CopyDir.newPath + "\n" + "å¿½ç•¥æ–‡ä»¶ç›®å½•ï¼š" + CopyDir.shieldFile);
                 File fromfile = new File(CopyDir.originalPath);
                 File tofile = new File(CopyDir.newPath);
                 CopyDir copy = new CopyDir();
@@ -196,15 +196,15 @@ public class CopyDir {
 
                 copy.listFileInDir(fromfile);
 
-                System.out.println("########################±¸·İ½áÊø########################");
+                System.out.println("########################å¤‡ä»½ç»“æŸ########################");
             }
         }
                 , date, PERIOD_DAY);
 
 //        CopyDir.setParameter();
 //        System.out.println(CopyDir.originalPath + " " + CopyDir.newPath + " " + CopyDir.shieldFile);
-//        System.out.println("########################¿ªÊ¼±¸·İ########################");
-//        System.out.println("Ô´ÎÄ¼şÄ¿Â¼£º"+CopyDir.originalPath + "\n" + "Ä¿±êÎÄ¼şÄ¿Â¼£º" + CopyDir.newPath + "\n" + "ºöÂÔÎÄ¼şÄ¿Â¼£º" + CopyDir.shieldFile);
+//        System.out.println("########################å¼€å§‹å¤‡ä»½########################");
+//        System.out.println("æºæ–‡ä»¶ç›®å½•ï¼š"+CopyDir.originalPath + "\n" + "ç›®æ ‡æ–‡ä»¶ç›®å½•ï¼š" + CopyDir.newPath + "\n" + "å¿½ç•¥æ–‡ä»¶ç›®å½•ï¼š" + CopyDir.shieldFile);
 //        File fromfile = new File(CopyDir.originalPath);
 //        File tofile = new File(CopyDir.newPath);
 //        CopyDir copy = new CopyDir();
@@ -214,6 +214,6 @@ public class CopyDir {
 //
 //        copy.listFileInDir(fromfile);
 //
-//        System.out.println("########################±¸·İ½áÊø########################");
+//        System.out.println("########################å¤‡ä»½ç»“æŸ########################");
     }
 }

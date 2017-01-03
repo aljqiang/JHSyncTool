@@ -4,7 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Log4j×Ô¶¨Òå
+ * Log4jè‡ªå®šä¹‰
  * User: Larry Lai
  * Date: 2016-08-24
  * Time: 10:43
@@ -39,7 +39,7 @@ public class LogUtil {
 
     protected static String getLogText(Object o) {
         if(null == o) {
-            return "ÈÕÖ¾Îª¿Õ£¡";
+            return "æ—¥å¿—ä¸ºç©ºï¼";
         } else if(!(o instanceof Exception)) {
             return o instanceof String?(String)o:String.valueOf(o);
         } else {
@@ -49,7 +49,7 @@ public class LogUtil {
             StackTraceElement[] st = e.getStackTrace();
 
             for(int i = 0; i < st.length; ++i) {
-                sb.append("\tÔÚ£º" + st[i].getClassName() + "." + st[i].getMethodName() + " µÚ " + st[i].getLineNumber() + " ĞĞ\r\n");
+                sb.append("\tåœ¨ï¼š" + st[i].getClassName() + "." + st[i].getMethodName() + " ç¬¬ " + st[i].getLineNumber() + " è¡Œ\r\n");
             }
 
             return sb.toString();
