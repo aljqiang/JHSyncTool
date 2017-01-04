@@ -130,8 +130,8 @@ public class FileTranserDateCycleUtil {
 
             LogUtil.info("########################开始同步录音文件########################");
 
-            Date startDate = new SimpleDateFormat("yyyyMMdd").parse("20170101");  // 定义起始日期
-            Date endDate = new SimpleDateFormat("yyyyMMdd").parse("20170104");  // 定义结束日期
+            Date startDate = new SimpleDateFormat("yyyyMMdd").parse("20161103");  // 定义起始日期
+            Date endDate = new SimpleDateFormat("yyyyMMdd").parse("20161231");  // 定义结束日期
 
             Calendar calendar = Calendar.getInstance();  // 定义日期实例
             calendar.setTime(startDate);  // 设置日期起始时间

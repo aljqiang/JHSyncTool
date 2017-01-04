@@ -168,7 +168,11 @@ public class FileTranserUtil {
                     for (int i = 0; remotePathFileNames !=null && i < remotePathFileNames.length; i++) {
                         String fileName = remotePathFileNames[i];
 
-                        if (!filesCheckArray.contains(fileName + ".wav")) {
+                        // 判断两个文件是否相同
+                        File remoteFileName=new File(remotePath.toString() + "\\" + fileName);
+                        File localFileName=new File(localPath.toString() + "\\" +fileName + ".wav");
+
+                        if (!filesCheckArray.contains(fileName + ".wav")  || !DiffUtil.check(remoteFileName,localFileName)) {
                             flag = true;
 
                             LogUtil.info(" 开始将录音文件:[" + fileName + ".wav" + "]同步到本地文件目录[" + localPath.toString() + "]");
